@@ -27,10 +27,6 @@
   --transition: all 0.2s ease;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 /* === Reset & Base === */
 *, *::before, *::after {
   box-sizing: border-box;
