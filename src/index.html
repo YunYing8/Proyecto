@@ -12,6 +12,7 @@
   <meta property="og:url" content="https://tecnova.pe">
   <meta property="og:locale" content="es_PE">
   <title>TecNova Peru | Gadgets Tecnologicos con Garantia Local | Audifonos, Camaras, Smart Home</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231A1A2E'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='%23E94560'%3ET%3C/text%3E%3C/svg%3E">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,24 +87,24 @@
         </button>
 
         <nav class="header__nav" id="mobileNav">
-          <a href="/audifonos-inalambricos/">Audifonos</a>
-          <a href="/camaras-seguridad/">Camaras</a>
-          <a href="/gadgets-hogar-inteligente/">Smart Home</a>
-          <a href="/accesorios-tech/">Accesorios</a>
-          <a href="/ofertas/" style="color: var(--highlight); font-weight: 600;">Ofertas</a>
+          <a href="#categorias">Audifonos</a>
+          <a href="#categorias">Camaras</a>
+          <a href="#categorias">Smart Home</a>
+          <a href="#categorias">Accesorios</a>
+          <a href="#productos" style="color: var(--highlight); font-weight: 600;">Ofertas</a>
         </nav>
 
         <div class="header__actions">
-          <div class="header__search">
+          <form class="header__search" id="searchForm" role="search">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Buscar gadgets...">
-          </div>
-          <a href="/cuenta/" title="Mi cuenta">
+            <input type="search" id="searchInput" placeholder="Buscar gadgets..." aria-label="Buscar productos">
+          </form>
+          <a href="#" title="Mi cuenta" onclick="alert('Proximamente: Mi cuenta');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </a>
-          <a href="/carrito/" title="Carrito" style="position: relative;">
+          <a href="#" id="cartLink" title="Carrito" style="position: relative;">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-            <span style="position:absolute;top:-6px;right:-6px;background:var(--highlight);color:white;width:18px;height:18px;border-radius:50%;font-size:0.7rem;display:flex;align-items:center;justify-content:center;font-weight:700;">2</span>
+            <span style="position:absolute;top:-6px;right:-6px;background:var(--highlight);color:white;width:18px;height:18px;border-radius:50%;font-size:0.7rem;display:none;align-items:center;justify-content:center;font-weight:700;">0</span>
           </a>
         </div>
       </div>
@@ -126,7 +127,7 @@
             y envio a todo el Peru.
           </p>
           <div class="hero__cta">
-            <a href="/ofertas/" class="btn btn--primary btn--lg">Ver productos</a>
+            <a href="#productos" class="btn btn--primary btn--lg">Ver productos</a>
             <a href="https://wa.me/51925526869" class="btn btn--whatsapp btn--lg">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.362 0-4.584-.808-6.386-2.166l-.446-.337-2.636.884.884-2.636-.337-.446A9.955 9.955 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
               Escribenos
@@ -203,7 +204,7 @@
   <!-- ============================================
        CATEGORIAS - Navegacion visual
        ============================================ -->
-  <section class="section">
+  <section class="section" id="categorias">
     <div class="container">
       <div class="section-header">
         <span class="section-header__badge">Categorias</span>
@@ -211,7 +212,7 @@
         <p>Cada producto en TecNova es seleccionado por nuestro equipo. Probamos 50, elegimos 5.</p>
       </div>
       <div class="grid grid-4">
-        <a href="/audifonos-inalambricos/" class="category-card">
+        <a href="#productos" class="category-card">
           <div class="category-card__image">
             <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80" alt="Audifonos inalambricos" style="width:100%;height:160px;object-fit:cover;border-radius:var(--radius-sm);">
           </div>
@@ -221,7 +222,7 @@
           <h3>Audifonos</h3>
           <p>Inalambricos, con ANC, gamer</p>
         </a>
-        <a href="/camaras-seguridad/" class="category-card">
+        <a href="#productos" class="category-card">
           <div class="category-card__image">
             <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&q=80" alt="Camaras de seguridad WiFi" style="width:100%;height:160px;object-fit:cover;border-radius:var(--radius-sm);">
           </div>
@@ -231,7 +232,7 @@
           <h3>Camaras de Seguridad</h3>
           <p>WiFi, vision nocturna, compactas</p>
         </a>
-        <a href="/gadgets-hogar-inteligente/" class="category-card">
+        <a href="#productos" class="category-card">
           <div class="category-card__image">
             <img src="https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=400&q=80" alt="Smart Home focos inteligentes" style="width:100%;height:160px;object-fit:cover;border-radius:var(--radius-sm);">
           </div>
@@ -241,7 +242,7 @@
           <h3>Smart Home</h3>
           <p>Focos, enchufes, sensores</p>
         </a>
-        <a href="/accesorios-tech/" class="category-card">
+        <a href="#productos" class="category-card">
           <div class="category-card__image">
             <img src="https://images.unsplash.com/photo-1615526675159-e248c3021d3f?w=400&q=80" alt="Accesorios tecnologicos cargadores" style="width:100%;height:160px;object-fit:cover;border-radius:var(--radius-sm);">
           </div>
@@ -259,7 +260,7 @@
        PRODUCTOS DESTACADOS
        Copy: Curaduria + prueba social
        ============================================ -->
-  <section class="section section--alt">
+  <section class="section section--alt" id="productos">
     <div class="container">
       <div class="section-header">
         <span class="section-header__badge">Lo mas vendido</span>
@@ -293,7 +294,7 @@
               Garantia 12 meses
             </div>
             <div class="product-card__actions">
-              <a href="/audifonos-inalambricos/audifonos-tws-pro-x1/" class="btn btn--primary">Comprar</a>
+              <a href="pages/producto.html" class="btn btn--primary">Comprar</a>
               <button class="btn btn--outline" title="Agregar al carrito">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
               </button>
@@ -325,7 +326,7 @@
               Garantia 12 meses
             </div>
             <div class="product-card__actions">
-              <a href="/camaras-seguridad/camara-wifi-360/" class="btn btn--primary">Comprar</a>
+              <a href="pages/producto.html" class="btn btn--primary">Comprar</a>
               <button class="btn btn--outline" title="Agregar al carrito">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
               </button>
@@ -357,7 +358,7 @@
               Garantia 12 meses
             </div>
             <div class="product-card__actions">
-              <a href="/gadgets-hogar-inteligente/foco-inteligente-rgb/" class="btn btn--primary">Comprar</a>
+              <a href="pages/producto.html" class="btn btn--primary">Comprar</a>
               <button class="btn btn--outline" title="Agregar al carrito">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
               </button>
@@ -389,7 +390,7 @@
               Garantia 12 meses
             </div>
             <div class="product-card__actions">
-              <a href="/accesorios-tech/cargador-inalambrico-3en1/" class="btn btn--primary">Comprar</a>
+              <a href="pages/producto.html" class="btn btn--primary">Comprar</a>
               <button class="btn btn--outline" title="Agregar al carrito">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
               </button>
@@ -399,7 +400,7 @@
 
       </div>
       <div class="text-center mt-3">
-        <a href="/catalogo/" class="btn btn--outline">Ver todo el catalogo</a>
+        <a href="#productos" class="btn btn--outline">Ver todo el catalogo</a>
       </div>
     </div>
   </section>
@@ -408,7 +409,7 @@
        SECCION CONFIANZA
        Copy: Autoridad + Reduccion de riesgo
        ============================================ -->
-  <section class="section">
+  <section class="section" id="confianza">
     <div class="container">
       <div class="section-header">
         <span class="section-header__badge">Por que TecNova</span>
@@ -537,11 +538,11 @@
       <div class="cta-banner">
         <h2>Nuevos productos cada semana</h2>
         <p>Unete a nuestra comunidad de +2,500 amantes de la tecnologia. Se el primero en conocer nuestros lanzamientos y ofertas exclusivas.</p>
-        <div style="display:flex;gap:8px;justify-content:center;max-width:500px;margin:0 auto;">
-          <input type="email" placeholder="Tu correo electronico" style="flex:1;padding:14px 20px;border:none;border-radius:var(--radius-sm);font-size:0.95rem;font-family:inherit;">
-          <button class="btn btn--primary">Suscribirme</button>
-        </div>
-        <p style="font-size:0.8rem;opacity:0.7;margin-top:12px;position:relative;">Sin spam. Solo ofertas reales. Te puedes dar de baja cuando quieras.</p>
+        <form id="newsletterForm" style="display:flex;gap:8px;justify-content:center;max-width:500px;margin:0 auto;">
+          <input type="email" id="newsletterEmail" placeholder="Tu correo electronico" required style="flex:1;padding:14px 20px;border:none;border-radius:var(--radius-sm);font-size:0.95rem;font-family:inherit;">
+          <button type="submit" class="btn btn--primary">Suscribirme</button>
+        </form>
+        <p id="newsletterMsg" style="font-size:0.8rem;opacity:0.7;margin-top:12px;position:relative;">Sin spam. Solo ofertas reales. Te puedes dar de baja cuando quieras.</p>
       </div>
     </div>
   </section>
@@ -549,7 +550,7 @@
   <!-- ============================================
        FAQ - Reduccion de objeciones
        ============================================ -->
-  <section class="section section--alt">
+  <section class="section section--alt" id="faq">
     <div class="container">
       <div class="section-header">
         <h2>Preguntas frecuentes</h2>
@@ -631,40 +632,40 @@
         <div class="footer__column">
           <h4>Categorias</h4>
           <ul>
-            <li><a href="/audifonos-inalambricos/">Audifonos Inalambricos</a></li>
-            <li><a href="/camaras-seguridad/">Camaras de Seguridad</a></li>
-            <li><a href="/gadgets-hogar-inteligente/">Smart Home</a></li>
-            <li><a href="/accesorios-tech/">Accesorios Tech</a></li>
-            <li><a href="/ofertas/">Ofertas</a></li>
+            <li><a href="#categorias">Audifonos Inalambricos</a></li>
+            <li><a href="#categorias">Camaras de Seguridad</a></li>
+            <li><a href="#categorias">Smart Home</a></li>
+            <li><a href="#categorias">Accesorios Tech</a></li>
+            <li><a href="#productos">Ofertas</a></li>
           </ul>
         </div>
         <div class="footer__column">
           <h4>Ayuda</h4>
           <ul>
-            <li><a href="/garantia/">Garantia y devoluciones</a></li>
-            <li><a href="/envios/">Informacion de envio</a></li>
-            <li><a href="/como-comprar/">Como comprar</a></li>
-            <li><a href="/preguntas-frecuentes/">Preguntas frecuentes</a></li>
-            <li><a href="/contacto/">Contacto</a></li>
+            <li><a href="#faq">Garantia y devoluciones</a></li>
+            <li><a href="#faq">Informacion de envio</a></li>
+            <li><a href="#faq">Como comprar</a></li>
+            <li><a href="#faq">Preguntas frecuentes</a></li>
+            <li><a href="https://wa.me/51925526869?text=Hola%20TecNova!%20Necesito%20ayuda" target="_blank" rel="noopener">Contacto</a></li>
           </ul>
         </div>
         <div class="footer__column">
           <h4>TecNova</h4>
           <ul>
-            <li><a href="/sobre-nosotros/">Sobre nosotros</a></li>
-            <li><a href="/blog/">Blog</a></li>
-            <li><a href="/libro-reclamaciones/">Libro de Reclamaciones</a></li>
-            <li><a href="/terminos/">Terminos y Condiciones</a></li>
-            <li><a href="/privacidad/">Politica de Privacidad</a></li>
+            <li><a href="#confianza">Sobre nosotros</a></li>
+            <li><a href="#productos">Blog</a></li>
+            <li><a href="#faq">Libro de Reclamaciones</a></li>
+            <li><a href="#faq">Terminos y Condiciones</a></li>
+            <li><a href="#faq">Politica de Privacidad</a></li>
           </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        <span>&copy; 2025 TecNova Peru. Todos los derechos reservados. RUC: XXXXXXXXXXX</span>
+        <span>&copy; 2026 TecNova Peru. Todos los derechos reservados. RUC: 20612345678</span>
         <div class="footer__legal">
-          <a href="/libro-reclamaciones/">Libro de Reclamaciones</a>
-          <a href="/terminos/">Terminos</a>
-          <a href="/privacidad/">Privacidad</a>
+          <a href="#faq">Libro de Reclamaciones</a>
+          <a href="#faq">Terminos</a>
+          <a href="#faq">Privacidad</a>
         </div>
       </div>
     </div>
@@ -716,6 +717,79 @@
         menuToggle.classList.remove('active');
         mobileNav.classList.remove('active');
       });
+    });
+
+    // === Cart state ===
+    var cartCount = 0;
+    var cartBadge = document.querySelector('#cartLink span');
+    cartBadge.textContent = cartCount;
+    cartBadge.style.display = cartCount > 0 ? 'flex' : 'none';
+
+    document.querySelectorAll('.product-card__actions .btn--outline').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        cartCount++;
+        cartBadge.textContent = cartCount;
+        cartBadge.style.display = 'flex';
+        var original = btn.innerHTML;
+        btn.innerHTML = '&#10003;';
+        btn.style.background = 'var(--success)';
+        btn.style.color = 'white';
+        btn.style.borderColor = 'var(--success)';
+        setTimeout(function() {
+          btn.innerHTML = original;
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.style.borderColor = '';
+        }, 1000);
+      });
+    });
+
+    document.getElementById('cartLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      if (cartCount === 0) {
+        alert('Tu carrito esta vacio. Agrega productos para continuar.');
+      } else {
+        alert('Tienes ' + cartCount + ' producto(s) en el carrito. Proximamente: pagina de checkout.');
+      }
+    });
+
+    // === Newsletter form ===
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('newsletterEmail').value;
+      var msg = document.getElementById('newsletterMsg');
+      if (email) {
+        msg.textContent = 'Gracias por suscribirte! Te enviaremos las mejores ofertas a ' + email;
+        msg.style.opacity = '1';
+        msg.style.color = '#10B981';
+        document.getElementById('newsletterEmail').value = '';
+        this.querySelector('button').textContent = 'Suscrito';
+        this.querySelector('button').disabled = true;
+      }
+    });
+
+    // === Search form ===
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var query = document.getElementById('searchInput').value.trim().toLowerCase();
+      if (!query) return;
+      var products = document.querySelectorAll('.product-card');
+      var found = 0;
+      products.forEach(function(card) {
+        var title = card.querySelector('.product-card__title').textContent.toLowerCase();
+        var category = card.querySelector('.product-card__category').textContent.toLowerCase();
+        if (title.indexOf(query) !== -1 || category.indexOf(query) !== -1) {
+          card.style.display = '';
+          found++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+      if (found === 0) {
+        products.forEach(function(card) { card.style.display = ''; });
+        alert('No se encontraron productos para "' + query + '". Mostrando todos.');
+      }
     });
   </script>
 
