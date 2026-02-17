@@ -673,31 +673,264 @@
   </footer>
 
   <!-- ============================================
-       CART DRAWER
+       CART DRAWER - Multi-step Checkout
        ============================================ -->
   <div id="cartOverlay" class="cart-overlay"></div>
   <aside id="cartDrawer" class="cart-drawer">
     <div class="cart-drawer__header">
-      <h3>Tu carrito</h3>
+      <button id="cartBack" class="cart-drawer__back" aria-label="Volver" style="display:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <h3 id="cartTitle">Tu carrito</h3>
       <button id="cartClose" class="cart-drawer__close" aria-label="Cerrar carrito">&times;</button>
     </div>
-    <div id="cartItems" class="cart-drawer__items">
-      <div id="cartEmpty" class="cart-drawer__empty">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <p>Tu carrito esta vacio</p>
-        <span>Agrega productos para comenzar</span>
+
+    <!-- Progress Steps -->
+    <div id="checkoutProgress" class="checkout-progress" style="display:none;">
+      <div class="checkout-progress__step active" data-step="1">
+        <span class="checkout-progress__num">1</span>
+        <span class="checkout-progress__label">Carrito</span>
+      </div>
+      <div class="checkout-progress__line"></div>
+      <div class="checkout-progress__step" data-step="2">
+        <span class="checkout-progress__num">2</span>
+        <span class="checkout-progress__label">Datos</span>
+      </div>
+      <div class="checkout-progress__line"></div>
+      <div class="checkout-progress__step" data-step="3">
+        <span class="checkout-progress__num">3</span>
+        <span class="checkout-progress__label">Confirmar</span>
       </div>
     </div>
-    <div id="cartFooter" class="cart-drawer__footer" style="display:none;">
-      <div class="cart-drawer__total">
-        <span>Total:</span>
-        <span id="cartTotal" class="price">S/ 0.00</span>
+
+    <!-- STEP 1: Cart Items -->
+    <div id="checkoutStep1" class="checkout-step">
+      <div id="cartItems" class="cart-drawer__items">
+        <div id="cartEmpty" class="cart-drawer__empty">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <p>Tu carrito esta vacio</p>
+          <span>Agrega productos para comenzar</span>
+        </div>
       </div>
-      <a href="https://wa.me/51925526869?text=Hola%20TecNova!%20Quiero%20comprar%20los%20productos%20de%20mi%20carrito" target="_blank" rel="noopener" class="btn btn--whatsapp" style="width:100%;justify-content:center;gap:8px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.362 0-4.584-.808-6.386-2.166l-.446-.337-2.636.884.884-2.636-.337-.446A9.955 9.955 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Pedir por WhatsApp
-      </a>
-      <button id="cartClear" class="btn btn--outline" style="width:100%;margin-top:8px;font-size:0.85rem;">Vaciar carrito</button>
+      <div id="cartFooter" class="cart-drawer__footer" style="display:none;">
+        <div class="cart-drawer__total">
+          <span>Total:</span>
+          <span id="cartTotal" class="price">S/ 0.00</span>
+        </div>
+        <button id="btnContinueCheckout" class="btn btn--primary" style="width:100%;">Continuar con el pedido</button>
+        <button id="cartClear" class="btn btn--outline" style="width:100%;margin-top:8px;font-size:0.85rem;">Vaciar carrito</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Customer Data -->
+    <div id="checkoutStep2" class="checkout-step" style="display:none;">
+      <div class="checkout-form">
+        <form id="checkoutForm" novalidate>
+          <div class="checkout-form__section">
+            <h4 class="checkout-form__title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Datos del cliente
+            </h4>
+            <div class="checkout-form__field">
+              <label for="checkoutName">Nombre completo *</label>
+              <input type="text" id="checkoutName" placeholder="Ej: Juan Perez" required autocomplete="name">
+            </div>
+            <div class="checkout-form__row">
+              <div class="checkout-form__field">
+                <label for="checkoutPhone">Telefono / WhatsApp *</label>
+                <input type="tel" id="checkoutPhone" placeholder="Ej: 925 526 869" required autocomplete="tel">
+              </div>
+              <div class="checkout-form__field">
+                <label for="checkoutEmail">Correo (opcional)</label>
+                <input type="email" id="checkoutEmail" placeholder="correo@ejemplo.com" autocomplete="email">
+              </div>
+            </div>
+            <div class="checkout-form__field">
+              <label for="checkoutDNI">DNI / RUC (opcional)</label>
+              <input type="text" id="checkoutDNI" placeholder="Ej: 12345678" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="checkout-form__section">
+            <h4 class="checkout-form__title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Direccion de envio
+            </h4>
+            <div class="checkout-form__field">
+              <label for="checkoutCity">Ciudad *</label>
+              <select id="checkoutCity" required>
+                <option value="">Selecciona tu ciudad</option>
+                <option value="Lima Metropolitana">Lima Metropolitana</option>
+                <option value="Callao">Callao</option>
+                <option value="Arequipa">Arequipa</option>
+                <option value="Trujillo">Trujillo</option>
+                <option value="Chiclayo">Chiclayo</option>
+                <option value="Piura">Piura</option>
+                <option value="Cusco">Cusco</option>
+                <option value="Huancayo">Huancayo</option>
+                <option value="Iquitos">Iquitos</option>
+                <option value="Tacna">Tacna</option>
+                <option value="Otra ciudad">Otra ciudad</option>
+              </select>
+            </div>
+            <div class="checkout-form__field" id="districtField">
+              <label for="checkoutDistrict">Distrito *</label>
+              <select id="checkoutDistrict" required>
+                <option value="">Selecciona tu distrito</option>
+                <option value="Miraflores">Miraflores</option>
+                <option value="San Isidro">San Isidro</option>
+                <option value="Surco">Santiago de Surco</option>
+                <option value="San Borja">San Borja</option>
+                <option value="La Molina">La Molina</option>
+                <option value="Barranco">Barranco</option>
+                <option value="San Miguel">San Miguel</option>
+                <option value="Jesus Maria">Jesus Maria</option>
+                <option value="Lince">Lince</option>
+                <option value="Pueblo Libre">Pueblo Libre</option>
+                <option value="Magdalena">Magdalena del Mar</option>
+                <option value="Surquillo">Surquillo</option>
+                <option value="Breña">Breña</option>
+                <option value="Lima Cercado">Lima Cercado</option>
+                <option value="Rimac">Rimac</option>
+                <option value="La Victoria">La Victoria</option>
+                <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
+                <option value="San Juan de Miraflores">San Juan de Miraflores</option>
+                <option value="Villa El Salvador">Villa El Salvador</option>
+                <option value="Villa Maria del Triunfo">Villa Maria del Triunfo</option>
+                <option value="Los Olivos">Los Olivos</option>
+                <option value="San Martin de Porres">San Martin de Porres</option>
+                <option value="Independencia">Independencia</option>
+                <option value="Comas">Comas</option>
+                <option value="Ate">Ate</option>
+                <option value="Santa Anita">Santa Anita</option>
+                <option value="El Agustino">El Agustino</option>
+                <option value="Otro">Otro distrito</option>
+              </select>
+            </div>
+            <div class="checkout-form__field">
+              <label for="checkoutAddress">Direccion completa *</label>
+              <input type="text" id="checkoutAddress" placeholder="Av. / Jr. / Calle, Numero, Dpto/Piso" required autocomplete="street-address">
+            </div>
+            <div class="checkout-form__field">
+              <label for="checkoutRef">Referencia (opcional)</label>
+              <input type="text" id="checkoutRef" placeholder="Ej: Frente al parque, edificio azul">
+            </div>
+
+            <!-- Map embed -->
+            <div class="checkout-form__map">
+              <label>Ubicacion de referencia</label>
+              <div id="checkoutMap" class="checkout-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d62447.05!2d-77.0428!3d-12.0464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2spe" width="100%" height="200" style="border:0;border-radius:var(--radius-sm);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de Lima"></iframe>
+                <p class="checkout-map__hint">Compartiras tu ubicacion exacta por WhatsApp</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="checkout-form__section">
+            <h4 class="checkout-form__title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Metodo de pago
+            </h4>
+            <div class="checkout-form__payment-options">
+              <label class="checkout-payment-option">
+                <input type="radio" name="paymentMethod" value="yape" checked>
+                <span class="checkout-payment-option__box">
+                  <strong>Yape / Plin</strong>
+                  <small>Transferencia instantanea</small>
+                </span>
+              </label>
+              <label class="checkout-payment-option">
+                <input type="radio" name="paymentMethod" value="transferencia">
+                <span class="checkout-payment-option__box">
+                  <strong>Transferencia bancaria</strong>
+                  <small>BCP, Interbank, BBVA</small>
+                </span>
+              </label>
+              <label class="checkout-payment-option">
+                <input type="radio" name="paymentMethod" value="contraentrega">
+                <span class="checkout-payment-option__box">
+                  <strong>Contraentrega</strong>
+                  <small>Solo Lima (pedido min. S/79)</small>
+                </span>
+              </label>
+              <label class="checkout-payment-option">
+                <input type="radio" name="paymentMethod" value="tarjeta">
+                <span class="checkout-payment-option__box">
+                  <strong>Tarjeta de credito/debito</strong>
+                  <small>Visa, Mastercard</small>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="checkout-form__field">
+            <label for="checkoutNotes">Notas adicionales (opcional)</label>
+            <textarea id="checkoutNotes" rows="2" placeholder="Instrucciones especiales, horario de entrega, etc."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="cart-drawer__footer">
+        <div class="cart-drawer__total">
+          <span>Total:</span>
+          <span id="cartTotal2" class="price">S/ 0.00</span>
+        </div>
+        <button id="btnReviewOrder" class="btn btn--primary" style="width:100%;">Revisar pedido</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Order Summary & Confirm -->
+    <div id="checkoutStep3" class="checkout-step" style="display:none;">
+      <div class="checkout-summary">
+        <div class="checkout-summary__section">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Productos
+          </h4>
+          <div id="summaryItems"></div>
+        </div>
+        <div class="checkout-summary__section">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Datos del cliente
+          </h4>
+          <div id="summaryClient" class="checkout-summary__details"></div>
+        </div>
+        <div class="checkout-summary__section">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Direccion de envio
+          </h4>
+          <div id="summaryAddress" class="checkout-summary__details"></div>
+        </div>
+        <div class="checkout-summary__section">
+          <h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Metodo de pago
+          </h4>
+          <div id="summaryPayment" class="checkout-summary__details"></div>
+        </div>
+        <div class="checkout-summary__shipping-note">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <div>
+            <strong>Envio:</strong> <span id="summaryShipping">Calculado al confirmar</span><br>
+            <small>Lima 24-48h | Provincias 3-5 dias</small>
+          </div>
+        </div>
+      </div>
+      <div class="cart-drawer__footer">
+        <div class="cart-drawer__total">
+          <span>Total:</span>
+          <span id="cartTotal3" class="price">S/ 0.00</span>
+        </div>
+        <a id="btnConfirmWhatsApp" href="#" target="_blank" rel="noopener" class="btn btn--whatsapp" style="width:100%;justify-content:center;gap:8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.362 0-4.584-.808-6.386-2.166l-.446-.337-2.636.884.884-2.636-.337-.446A9.955 9.955 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Confirmar pedido por WhatsApp
+        </a>
+        <p class="checkout-summary__secure">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Pedido seguro. Tus datos solo se usan para el envio.
+        </p>
+      </div>
     </div>
   </aside>
 
@@ -749,7 +982,7 @@
       });
     });
 
-    // === Cart system ===
+    // === Cart system with multi-step checkout ===
     var cart = JSON.parse(localStorage.getItem('tecnova_cart') || '[]');
     var cartBadge = document.querySelector('#cartLink span');
     var cartDrawer = document.getElementById('cartDrawer');
@@ -758,8 +991,18 @@
     var cartEmptyEl = document.getElementById('cartEmpty');
     var cartFooterEl = document.getElementById('cartFooter');
     var cartTotalEl = document.getElementById('cartTotal');
+    var currentStep = 1;
+
+    // Checkout step elements
+    var checkoutProgress = document.getElementById('checkoutProgress');
+    var cartBack = document.getElementById('cartBack');
+    var cartTitle = document.getElementById('cartTitle');
+    var step1 = document.getElementById('checkoutStep1');
+    var step2 = document.getElementById('checkoutStep2');
+    var step3 = document.getElementById('checkoutStep3');
 
     function openCart() {
+      goToStep(1);
       cartDrawer.classList.add('active');
       cartOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -769,6 +1012,44 @@
       cartOverlay.classList.remove('active');
       document.body.style.overflow = '';
     }
+
+    function goToStep(step) {
+      currentStep = step;
+      step1.style.display = step === 1 ? 'flex' : 'none';
+      step2.style.display = step === 2 ? 'flex' : 'none';
+      step3.style.display = step === 3 ? 'flex' : 'none';
+
+      // Show/hide progress bar and back
+      if (step === 1) {
+        checkoutProgress.style.display = 'none';
+        cartBack.style.display = 'none';
+        cartTitle.textContent = 'Tu carrito';
+      } else {
+        checkoutProgress.style.display = 'flex';
+        cartBack.style.display = 'flex';
+        if (step === 2) cartTitle.textContent = 'Tus datos';
+        if (step === 3) cartTitle.textContent = 'Confirmar pedido';
+      }
+
+      // Update progress indicators
+      document.querySelectorAll('.checkout-progress__step').forEach(function(el) {
+        var s = parseInt(el.dataset.step);
+        el.classList.remove('active', 'completed');
+        if (s === step) el.classList.add('active');
+        if (s < step) el.classList.add('completed');
+      });
+
+      // Update totals across steps
+      var total = cart.reduce(function(sum, item) { return sum + (item.price * item.qty); }, 0);
+      var totalStr = 'S/ ' + total.toFixed(2);
+      if (document.getElementById('cartTotal2')) document.getElementById('cartTotal2').textContent = totalStr;
+      if (document.getElementById('cartTotal3')) document.getElementById('cartTotal3').textContent = totalStr;
+    }
+
+    // Back button
+    cartBack.addEventListener('click', function() {
+      if (currentStep > 1) goToStep(currentStep - 1);
+    });
 
     document.getElementById('cartClose').addEventListener('click', closeCart);
     cartOverlay.addEventListener('click', closeCart);
@@ -814,14 +1095,6 @@
 
         var total = cart.reduce(function(sum, item) { return sum + (item.price * item.qty); }, 0);
         cartTotalEl.textContent = 'S/ ' + total.toFixed(2);
-
-        // Build WhatsApp message with cart items
-        var waMsg = 'Hola TecNova! Quiero comprar:%0A';
-        cart.forEach(function(item) {
-          waMsg += '- ' + item.name + ' (x' + item.qty + ') S/' + (item.price * item.qty).toFixed(2) + '%0A';
-        });
-        waMsg += 'Total: S/' + total.toFixed(2);
-        cartFooterEl.querySelector('a').href = 'https://wa.me/51925526869?text=' + waMsg;
       }
       updateCartBadge();
     }
@@ -848,6 +1121,140 @@
       cart = [];
       renderCart();
     });
+
+    // Continue to checkout (Step 1 → Step 2)
+    document.getElementById('btnContinueCheckout').addEventListener('click', function() {
+      if (cart.length === 0) return;
+      goToStep(2);
+    });
+
+    // Show/hide district based on city
+    var citySelect = document.getElementById('checkoutCity');
+    var districtField = document.getElementById('districtField');
+    citySelect.addEventListener('change', function() {
+      var val = this.value;
+      if (val === 'Lima Metropolitana' || val === 'Callao') {
+        districtField.style.display = 'block';
+        document.getElementById('checkoutDistrict').required = true;
+      } else {
+        districtField.style.display = 'none';
+        document.getElementById('checkoutDistrict').required = false;
+        document.getElementById('checkoutDistrict').value = '';
+      }
+    });
+
+    // Validate form & go to Step 3
+    document.getElementById('btnReviewOrder').addEventListener('click', function() {
+      var form = document.getElementById('checkoutForm');
+      var name = document.getElementById('checkoutName');
+      var phone = document.getElementById('checkoutPhone');
+      var city = document.getElementById('checkoutCity');
+      var district = document.getElementById('checkoutDistrict');
+      var address = document.getElementById('checkoutAddress');
+      var hasError = false;
+
+      // Clear previous errors
+      form.querySelectorAll('.error').forEach(function(el) { el.classList.remove('error'); });
+
+      // Validate required
+      [name, phone, city, address].forEach(function(field) {
+        if (!field.value.trim()) {
+          field.classList.add('error');
+          hasError = true;
+        }
+      });
+      if (district.required && !district.value) {
+        district.classList.add('error');
+        hasError = true;
+      }
+
+      if (hasError) {
+        var firstError = form.querySelector('.error');
+        if (firstError) firstError.focus();
+        return;
+      }
+
+      // Build summary
+      buildOrderSummary();
+      goToStep(3);
+    });
+
+    function buildOrderSummary() {
+      // Products summary
+      var summaryItems = document.getElementById('summaryItems');
+      summaryItems.innerHTML = '';
+      var total = 0;
+      cart.forEach(function(item) {
+        var lineTotal = item.price * item.qty;
+        total += lineTotal;
+        var div = document.createElement('div');
+        div.className = 'summary-item';
+        div.innerHTML = '<span class="summary-item__name">' + item.name + '</span>' +
+          '<span class="summary-item__qty">x' + item.qty + '</span>' +
+          '<span class="summary-item__total">S/ ' + lineTotal.toFixed(2) + '</span>';
+        summaryItems.appendChild(div);
+      });
+
+      // Client info
+      var clientName = document.getElementById('checkoutName').value.trim();
+      var clientPhone = document.getElementById('checkoutPhone').value.trim();
+      var clientEmail = document.getElementById('checkoutEmail').value.trim();
+      var clientDNI = document.getElementById('checkoutDNI').value.trim();
+      var clientHTML = '<p><strong>' + clientName + '</strong></p>' +
+        '<p class="label">Tel: ' + clientPhone + '</p>';
+      if (clientEmail) clientHTML += '<p class="label">Email: ' + clientEmail + '</p>';
+      if (clientDNI) clientHTML += '<p class="label">DNI/RUC: ' + clientDNI + '</p>';
+      document.getElementById('summaryClient').innerHTML = clientHTML;
+
+      // Address
+      var city = document.getElementById('checkoutCity').value;
+      var district = document.getElementById('checkoutDistrict').value;
+      var addr = document.getElementById('checkoutAddress').value.trim();
+      var ref = document.getElementById('checkoutRef').value.trim();
+      var addrHTML = '<p><strong>' + addr + '</strong></p>';
+      addrHTML += '<p class="label">' + (district ? district + ', ' : '') + city + '</p>';
+      if (ref) addrHTML += '<p class="label">Ref: ' + ref + '</p>';
+      document.getElementById('summaryAddress').innerHTML = addrHTML;
+
+      // Payment
+      var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+      var paymentNames = {
+        'yape': 'Yape / Plin',
+        'transferencia': 'Transferencia bancaria',
+        'contraentrega': 'Contraentrega',
+        'tarjeta': 'Tarjeta de credito/debito'
+      };
+      var payName = paymentMethod ? paymentNames[paymentMethod.value] || paymentMethod.value : 'No seleccionado';
+      document.getElementById('summaryPayment').innerHTML = '<p><strong>' + payName + '</strong></p>';
+
+      // Shipping estimate
+      var isLima = (city === 'Lima Metropolitana' || city === 'Callao');
+      document.getElementById('summaryShipping').textContent = isLima ? 'Lima: S/ 10 - S/ 15' : 'Provincia: S/ 15 - S/ 25';
+
+      // Build WhatsApp link
+      var notes = document.getElementById('checkoutNotes').value.trim();
+      var msg = 'Hola TecNova! Quiero confirmar mi pedido:%0A%0A';
+      msg += '*PRODUCTOS:*%0A';
+      cart.forEach(function(item) {
+        msg += '• ' + item.name + ' (x' + item.qty + ') - S/' + (item.price * item.qty).toFixed(2) + '%0A';
+      });
+      msg += '%0A*TOTAL: S/' + total.toFixed(2) + '*%0A%0A';
+      msg += '*DATOS DEL CLIENTE:*%0A';
+      msg += 'Nombre: ' + clientName + '%0A';
+      msg += 'Telefono: ' + clientPhone + '%0A';
+      if (clientEmail) msg += 'Email: ' + clientEmail + '%0A';
+      if (clientDNI) msg += 'DNI/RUC: ' + clientDNI + '%0A';
+      msg += '%0A*DIRECCION DE ENVIO:*%0A';
+      msg += addr + '%0A';
+      if (district) msg += 'Distrito: ' + district + '%0A';
+      msg += 'Ciudad: ' + city + '%0A';
+      if (ref) msg += 'Referencia: ' + ref + '%0A';
+      msg += '%0A*PAGO:* ' + payName + '%0A';
+      if (notes) msg += '%0A*NOTAS:* ' + notes + '%0A';
+      msg += '%0AGracias!';
+
+      document.getElementById('btnConfirmWhatsApp').href = 'https://wa.me/51925526869?text=' + msg;
+    }
 
     // Add to cart from product cards
     document.querySelectorAll('.product-card__actions .btn--outline').forEach(function(btn) {
