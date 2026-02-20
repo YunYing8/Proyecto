@@ -317,7 +317,10 @@
 
           <!-- CTA Buttons -->
           <div class="product-page__cta-group">
-            <button class="btn btn--primary btn--lg" id="addToCartBtn" style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px;">
+            <button class="btn btn--primary btn--lg" id="addToCartBtn" style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px;"
+              data-name="Audifonos TWS Bluetooth 5.3 con Cancelacion de Ruido"
+              data-price="129"
+              data-image="https://images.unsplash.com/photo-1590658268037-6bf12f032f55?w=400&q=80">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
               Agregar al carrito - S/ 129.00
             </button>
@@ -641,9 +644,9 @@
         <div class="footer__column">
           <h4>Legal</h4>
           <ul>
-            <li><a href="../index.html#faq">Libro de Reclamaciones</a></li>
-            <li><a href="../index.html#faq">Terminos</a></li>
-            <li><a href="../index.html#faq">Privacidad</a></li>
+            <li><a href="libro-reclamaciones.html">Libro de Reclamaciones</a></li>
+            <li><a href="terminos.html">Terminos</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
           </ul>
         </div>
       </div>
@@ -713,14 +716,22 @@
       if (qty < 10) { qty++; qtyEl.textContent = qty; }
     });
 
-    // Add to cart button
+    // Add to cart - REAL localStorage
     document.getElementById('addToCartBtn').addEventListener('click', function() {
       var btn = this;
+      var name = btn.dataset.name;
+      var price = parseFloat(btn.dataset.price);
+      var image = btn.dataset.image;
+      var cart = JSON.parse(localStorage.getItem('tecnova_cart') || '[]');
+      var existing = null;
+      for (var i = 0; i < cart.length; i++) { if (cart[i].name === name) { existing = cart[i]; break; } }
+      if (existing) { existing.qty += qty; } else { cart.push({ name: name, price: price, image: image, qty: qty }); }
+      localStorage.setItem('tecnova_cart', JSON.stringify(cart));
       btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Agregado al carrito!';
       btn.style.background = 'var(--success)';
       btn.style.borderColor = 'var(--success)';
       setTimeout(function() {
-        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Agregar al carrito - S/ 129.00';
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Agregar al carrito - S/ ' + price.toFixed(2);
         btn.style.background = '';
         btn.style.borderColor = '';
       }, 1500);
