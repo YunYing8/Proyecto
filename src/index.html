@@ -1308,6 +1308,25 @@
       openCart();
     });
 
+    // Save order and redirect to thank you page when confirming via WhatsApp
+    document.getElementById('btnConfirmWhatsApp').addEventListener('click', function() {
+      var orderNumber = 'TN-' + Date.now().toString(36).toUpperCase();
+      var paymentMethod = document.querySelector('input[name="payment"]:checked');
+      var order = {
+        orderNumber: orderNumber,
+        items: cart.slice(),
+        name: document.getElementById('checkoutName').value.trim(),
+        phone: document.getElementById('checkoutPhone').value.trim(),
+        city: document.getElementById('checkoutCity').value,
+        address: document.getElementById('checkoutAddress').value.trim(),
+        payment: paymentMethod ? paymentMethod.value : ''
+      };
+      localStorage.setItem('tecnova_last_order', JSON.stringify(order));
+      cart = [];
+      localStorage.setItem('tecnova_cart', JSON.stringify(cart));
+      setTimeout(function() { window.location.href = 'pages/gracias.html'; }, 1500);
+    });
+
     renderCart();
 
     // === Newsletter form ===

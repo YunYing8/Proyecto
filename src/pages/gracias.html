@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pedido confirmado | TecNova Peru</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231A1A2E'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='%23E94560'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .gracias { text-align: center; padding: 60px 20px; max-width: 600px; margin: 0 auto; }
+    .gracias__icon { width: 80px; height: 80px; border-radius: 50%; background: var(--success); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+    .gracias__icon svg { width: 40px; height: 40px; stroke: white; }
+    .gracias__title { font-size: 1.8rem; margin-bottom: 8px; }
+    .gracias__subtitle { color: var(--text-secondary); font-size: 1rem; margin-bottom: 32px; }
+    .gracias__order { background: var(--surface); border-radius: var(--radius-md); padding: 24px; margin-bottom: 24px; text-align: left; }
+    .gracias__order-number { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+    .gracias__items { margin-top: 16px; }
+    .gracias__item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .gracias__item:last-child { border-bottom: none; font-weight: 700; padding-top: 12px; }
+    .gracias__steps { text-align: left; margin-bottom: 32px; }
+    .gracias__steps h3 { font-size: 1rem; margin-bottom: 16px; }
+    .gracias__step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+    .gracias__step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+    .gracias__step-text { font-size: 0.9rem; line-height: 1.5; }
+    .gracias__step-text strong { display: block; }
+    .gracias__actions { display: flex; flex-direction: column; gap: 10px; }
+    .gracias__empty { padding: 40px 20px; text-align: center; }
+    .gracias__empty p { color: var(--text-secondary); margin-bottom: 16px; }
+    @media (max-width: 768px) {
+      .gracias__title { font-size: 1.4rem; }
+      .gracias__order { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-bar__content">
+        <span class="trust-bar__item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Garantia 12 meses
+        </span>
+        <span class="trust-bar__item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Envio a todo el Peru
+        </span>
+        <span class="trust-bar__item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          WhatsApp: +51 925 526 869
+        </span>
+        <span class="trust-bar__item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Paga con Yape, Plin o tarjeta
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header__content">
+        <a href="../index.html" class="header__logo">Tec<span>Nova</span></a>
+        <button class="header__hamburger" id="menuToggle" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="header__nav" id="mobileNav">
+          <a href="../index.html#categorias">Audifonos</a>
+          <a href="../index.html#categorias">Camaras</a>
+          <a href="../index.html#categorias">Smart Home</a>
+          <a href="../index.html#categorias">Accesorios</a>
+          <a href="../index.html#productos" style="color: var(--highlight); font-weight: 600;">Ofertas</a>
+        </nav>
+        <div class="header__actions">
+          <a href="../index.html" title="Volver al inicio">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <!-- Contenido dinamico: se llena con JS si hay pedido en localStorage -->
+      <div id="graciasContent" class="gracias">
+        <div class="gracias__empty">
+          <p>No hay un pedido reciente para mostrar.</p>
+          <a href="../index.html" class="btn btn--primary">Ir al inicio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__content">
+        <div class="footer__brand"><h3>Tec<span>Nova</span></h3><p>Tecnologia inteligente para tu vida diaria.</p><div class="footer__payment mt-2"><span class="footer__payment-icon">Visa</span><span class="footer__payment-icon">Mastercard</span><span class="footer__payment-icon">Yape</span><span class="footer__payment-icon">Plin</span></div></div>
+        <div class="footer__column"><h4>Categorias</h4><ul><li><a href="../index.html#categorias">Audifonos</a></li><li><a href="../index.html#categorias">Camaras</a></li><li><a href="../index.html#categorias">Smart Home</a></li><li><a href="../index.html#categorias">Accesorios</a></li></ul></div>
+        <div class="footer__column"><h4>Ayuda</h4><ul><li><a href="../index.html#faq">Garantia</a></li><li><a href="../index.html#faq">Envios</a></li><li><a href="https://wa.me/51925526869?text=Hola%20TecNova!%20Necesito%20ayuda" target="_blank" rel="noopener">Contacto</a></li></ul></div>
+        <div class="footer__column"><h4>Legal</h4><ul><li><a href="libro-reclamaciones.html">Libro de Reclamaciones</a></li><li><a href="terminos.html">Terminos</a></li><li><a href="privacidad.html">Privacidad</a></li></ul></div>
+      </div>
+      <div class="footer__bottom"><span>&copy; 2026 TecNova Peru. RUC: 20612345678</span></div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    var menuToggle = document.getElementById('menuToggle');
+    var mobileNav = document.getElementById('mobileNav');
+    menuToggle.addEventListener('click', function() { menuToggle.classList.toggle('active'); mobileNav.classList.toggle('active'); });
+    mobileNav.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', function() { menuToggle.classList.remove('active'); mobileNav.classList.remove('active'); }); });
+
+    // Load order from localStorage
+    var order = JSON.parse(localStorage.getItem('tecnova_last_order') || 'null');
+    if (order && order.items && order.items.length > 0) {
+      var total = order.items.reduce(function(s, i) { return s + (i.price * i.qty); }, 0);
+      var itemsHtml = '';
+      order.items.forEach(function(item) {
+        itemsHtml += '<div class="gracias__item"><span>' + item.name + ' x' + item.qty + '</span><span>S/ ' + (item.price * item.qty).toFixed(2) + '</span></div>';
+      });
+      itemsHtml += '<div class="gracias__item"><span>Total</span><span>S/ ' + total.toFixed(2) + '</span></div>';
+
+      var payNames = { 'yape': 'Yape / Plin', 'transferencia': 'Transferencia bancaria', 'contraentrega': 'Contraentrega', 'tarjeta': 'Tarjeta credito/debito' };
+
+      document.getElementById('graciasContent').innerHTML =
+        '<div class="gracias__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+        '<h1 class="gracias__title">Gracias por tu pedido!</h1>' +
+        '<p class="gracias__subtitle">Tu pedido fue enviado por WhatsApp. Te responderemos en minutos.</p>' +
+        '<div class="gracias__order">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+            '<span style="font-size:0.85rem;color:var(--text-secondary);">Numero de pedido</span>' +
+            '<span class="gracias__order-number">' + order.orderNumber + '</span>' +
+          '</div>' +
+          '<div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:4px;">Cliente: <strong style="color:var(--text);">' + order.name + '</strong></div>' +
+          '<div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:4px;">Envio a: <strong style="color:var(--text);">' + order.address + ', ' + order.city + '</strong></div>' +
+          '<div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">Pago: <strong style="color:var(--text);">' + (payNames[order.payment] || order.payment) + '</strong></div>' +
+          '<div class="gracias__items">' + itemsHtml + '</div>' +
+        '</div>' +
+        '<div class="gracias__steps">' +
+          '<h3>Proximos pasos:</h3>' +
+          '<div class="gracias__step"><span class="gracias__step-num">1</span><div class="gracias__step-text"><strong>Confirmacion por WhatsApp</strong>Te responderemos en los proximos minutos para confirmar disponibilidad y coordinar el pago.</div></div>' +
+          '<div class="gracias__step"><span class="gracias__step-num">2</span><div class="gracias__step-text"><strong>Pago</strong>Realizas el pago por ' + (payNames[order.payment] || order.payment) + '. Te enviaremos los datos.</div></div>' +
+          '<div class="gracias__step"><span class="gracias__step-num">3</span><div class="gracias__step-text"><strong>Envio</strong>Preparamos tu pedido y te enviamos el numero de seguimiento.' + (order.city === 'Lima Metropolitana' || order.city === 'Callao' ? ' Recibelo en 24-48h.' : ' Llega en 3-5 dias.') + '</div></div>' +
+          '<div class="gracias__step"><span class="gracias__step-num">4</span><div class="gracias__step-text"><strong>Disfruta!</strong>Garantia de 12 meses. Cualquier duda, escribenos por WhatsApp.</div></div>' +
+        '</div>' +
+        '<div class="gracias__actions">' +
+          '<a href="../index.html" class="btn btn--primary" style="width:100%;">Seguir comprando</a>' +
+          '<a href="https://wa.me/51925526869?text=Hola!%20Acabo%20de%20hacer%20el%20pedido%20' + order.orderNumber + '%20y%20tengo%20una%20consulta" class="btn btn--whatsapp" style="width:100%;justify-content:center;gap:8px;" target="_blank" rel="noopener">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>' +
+            'Consultar sobre mi pedido' +
+          '</a>' +
+        '</div>';
+
+      // Clear the order after showing (so refreshing shows empty)
+      localStorage.removeItem('tecnova_last_order');
+    }
+  </script>
+</body>
+</html>
