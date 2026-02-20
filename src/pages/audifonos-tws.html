@@ -110,8 +110,16 @@
           <a href="../index.html#productos" style="color: var(--highlight); font-weight: 600;">Ofertas</a>
         </nav>
         <div class="header__actions">
+          <button class="theme-toggle" id="themeToggle" title="Cambiar tema" aria-label="Cambiar tema claro/oscuro">
+            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
           <a href="../index.html" title="Volver al inicio">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </a>
+          <a href="../index.html#carrito" id="cartBadgeLink" title="Ver carrito" style="position:relative;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            <span id="cartBadge" style="position:absolute;top:-6px;right:-6px;background:var(--highlight);color:white;width:18px;height:18px;border-radius:50%;font-size:0.7rem;display:none;align-items:center;justify-content:center;font-weight:700;">0</span>
           </a>
         </div>
       </div>
@@ -416,6 +424,43 @@
     var mobileNav = document.getElementById('mobileNav');
     menuToggle.addEventListener('click', function() { menuToggle.classList.toggle('active'); mobileNav.classList.toggle('active'); });
     mobileNav.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', function() { menuToggle.classList.remove('active'); mobileNav.classList.remove('active'); }); });
+
+    // Cart badge
+    function updateCartBadge() {
+      var cart = JSON.parse(localStorage.getItem('tecnova_cart') || '[]');
+      var badge = document.getElementById('cartBadge');
+      var total = cart.reduce(function(s, i) { return s + i.qty; }, 0);
+      if (total > 0) { badge.textContent = total; badge.style.display = 'flex'; }
+      else { badge.style.display = 'none'; }
+    }
+    updateCartBadge();
+    // Update badge after adding to cart
+    var origAddClick = document.getElementById('addToCartBtn').onclick;
+    document.getElementById('addToCartBtn').addEventListener('click', function() { setTimeout(updateCartBadge, 100); });
+
+    // Dark mode
+    var themeToggle = document.getElementById('themeToggle');
+    function setTheme(theme) { document.documentElement.setAttribute('data-theme', theme); localStorage.setItem('tecnova_theme', theme); }
+    var savedTheme = localStorage.getItem('tecnova_theme');
+    if (savedTheme) setTheme(savedTheme);
+    themeToggle.addEventListener('click', function() {
+      var current = document.documentElement.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Lightbox zoom
+    var lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = '<button class="lightbox__close" aria-label="Cerrar">&times;</button><img src="" alt="Zoom">';
+    document.body.appendChild(lightbox);
+    var lbImg = lightbox.querySelector('img');
+    document.querySelector('.product-gallery__main').addEventListener('click', function() {
+      var src = document.getElementById('mainImage').src.replace('w=600', 'w=1200');
+      lbImg.src = src;
+      lightbox.classList.add('active');
+    });
+    lightbox.addEventListener('click', function(e) { if (e.target !== lbImg) lightbox.classList.remove('active'); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lightbox.classList.remove('active'); });
   </script>
 </body>
 </html>
