@@ -303,6 +303,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
               Garantia 12 meses
             </div>
+            <div class="countdown" data-hours="5"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Oferta termina en </span><span class="countdown__time"></span></div>
           </a>
             <div class="product-card__actions" style="padding: 0 16px 16px;">
               <a href="pages/audifonos-tws.html" class="btn btn--primary">Comprar</a>
@@ -337,6 +338,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
                 Garantia 12 meses
               </div>
+              <div class="countdown" data-hours="3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Oferta termina en </span><span class="countdown__time"></span></div>
           </a>
             <div class="product-card__actions" style="padding: 0 16px 16px;">
               <a href="pages/camara-wifi-360.html" class="btn btn--primary">Comprar</a>
@@ -371,6 +373,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
                 Garantia 12 meses
               </div>
+              <div class="countdown" data-hours="8"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Oferta termina en </span><span class="countdown__time"></span></div>
           </a>
             <div class="product-card__actions" style="padding: 0 16px 16px;">
               <a href="pages/foco-inteligente.html" class="btn btn--primary">Comprar</a>
@@ -405,6 +408,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
                 Garantia 12 meses
               </div>
+              <div class="countdown" data-hours="6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Oferta termina en </span><span class="countdown__time"></span></div>
           </a>
             <div class="product-card__actions" style="padding: 0 16px 16px;">
               <a href="pages/cargador-inalambrico.html" class="btn btn--primary">Comprar</a>
@@ -958,6 +962,18 @@
     </a>
   </div>
 
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Volver arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="alert">
+    <span class="toast__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+    <span id="toastMsg">Producto agregado</span>
+    <button class="toast__action" id="toastAction">Ver carrito</button>
+  </div>
+
   <!-- ============================================
        FAQ Toggle Script
        ============================================ -->
@@ -1441,6 +1457,64 @@
       var current = document.documentElement.getAttribute('data-theme');
       setTheme(current === 'dark' ? 'light' : 'dark');
     });
+
+    // === Scroll to Top ===
+    var scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) scrollTopBtn.classList.add('visible');
+      else scrollTopBtn.classList.remove('visible');
+    });
+    scrollTopBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // === Toast notification ===
+    var toastEl = document.getElementById('toast');
+    var toastMsg = document.getElementById('toastMsg');
+    var toastTimer;
+    function showToast(msg) {
+      toastMsg.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() { toastEl.classList.remove('show'); }, 3000);
+    }
+    document.getElementById('toastAction').addEventListener('click', function() {
+      toastEl.classList.remove('show');
+      openCart();
+    });
+    // Override cart button feedback to use toast
+    document.querySelectorAll('.product-card__actions .btn--outline').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var card = btn.closest('.product-card');
+        var name = card.querySelector('.product-card__title').textContent;
+        showToast(name.substring(0, 35) + '... agregado al carrito');
+      });
+    });
+
+    // === Countdown timers ===
+    function initCountdowns() {
+      document.querySelectorAll('.countdown').forEach(function(el) {
+        var baseHours = parseInt(el.dataset.hours) || 4;
+        // Use date-based seed so it resets daily
+        var today = new Date();
+        var dayMinutes = today.getHours() * 60 + today.getMinutes();
+        var totalMinutes = baseHours * 60 - (dayMinutes % (baseHours * 60));
+        var endTime = Date.now() + totalMinutes * 60 * 1000;
+
+        function tick() {
+          var diff = endTime - Date.now();
+          if (diff <= 0) { diff = baseHours * 3600000; endTime = Date.now() + diff; }
+          var h = Math.floor(diff / 3600000);
+          var m = Math.floor((diff % 3600000) / 60000);
+          var s = Math.floor((diff % 60000) / 1000);
+          el.querySelector('.countdown__time').textContent =
+            (h > 0 ? h + 'h ' : '') + (m < 10 ? '0' : '') + m + 'm ' + (s < 10 ? '0' : '') + s + 's';
+        }
+        tick();
+        setInterval(tick, 1000);
+      });
+    }
+    initCountdowns();
   </script>
 
 </body>
