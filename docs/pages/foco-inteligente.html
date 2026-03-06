@@ -400,6 +400,25 @@
     <a href="../index.html" class="toast__action">Ver carrito</a>
   </div>
 
+  <!-- Cookie Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p class="cookie-banner__text">Usamos cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra <a href="privacidad.html">Politica de Privacidad</a>.</p>
+    <div class="cookie-banner__actions">
+      <button class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAccept">Aceptar</button>
+      <button class="cookie-banner__btn cookie-banner__btn--reject" id="cookieReject">Rechazar</button>
+    </div>
+  </div>
+
+  <!-- Social Proof Popup -->
+  <div class="social-proof" id="socialProof">
+    <button class="social-proof__close" id="socialProofClose">&times;</button>
+    <img class="social-proof__img" id="socialProofImg" src="" alt="Producto">
+    <div>
+      <div class="social-proof__text"><span class="social-proof__name" id="socialProofName"></span> compro <span class="social-proof__product" id="socialProofProduct"></span></div>
+      <div class="social-proof__time" id="socialProofTime"></div>
+    </div>
+  </div>
+
   <script>
     // Tabs
     document.querySelectorAll('.product-page__tab-btn').forEach(function(btn) {
@@ -544,6 +563,45 @@
       }
       tick(); setInterval(tick, 1000);
     });
+
+    // Cookie Banner
+    (function() {
+      if (!localStorage.getItem('tecnova_cookies')) {
+        setTimeout(function() { document.getElementById('cookieBanner').classList.add('show'); }, 1500);
+      }
+      document.getElementById('cookieAccept').addEventListener('click', function() {
+        localStorage.setItem('tecnova_cookies', 'accepted');
+        document.getElementById('cookieBanner').classList.remove('show');
+      });
+      document.getElementById('cookieReject').addEventListener('click', function() {
+        localStorage.setItem('tecnova_cookies', 'rejected');
+        document.getElementById('cookieBanner').classList.remove('show');
+      });
+    })();
+
+    // Social Proof
+    (function() {
+      var proofs = [
+        { name: 'Maria de Lima', product: 'Audifonos TWS Pro', time: 'hace 3 min', img: 'https://images.unsplash.com/photo-1590658268037-6bf12f032f55?w=100&q=60' },
+        { name: 'Carlos de Arequipa', product: 'Camara WiFi 360', time: 'hace 7 min', img: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=100&q=60' },
+        { name: 'Ana de Trujillo', product: 'Foco Inteligente', time: 'hace 12 min', img: 'https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=100&q=60' },
+        { name: 'Juan de Cusco', product: 'Cargador 3 en 1', time: 'hace 18 min', img: 'https://images.unsplash.com/photo-1615526675159-e248c3021d3f?w=100&q=60' }
+      ];
+      var el = document.getElementById('socialProof');
+      var idx = 0, dismissed = false;
+      document.getElementById('socialProofClose').addEventListener('click', function(e) { e.stopPropagation(); el.classList.remove('show'); dismissed = true; });
+      function showNext() {
+        if (dismissed) return;
+        var p = proofs[idx % proofs.length];
+        document.getElementById('socialProofName').textContent = p.name;
+        document.getElementById('socialProofProduct').textContent = p.product;
+        document.getElementById('socialProofTime').textContent = p.time;
+        document.getElementById('socialProofImg').src = p.img;
+        el.classList.add('show');
+        setTimeout(function() { el.classList.remove('show'); idx++; setTimeout(showNext, 15000 + Math.random() * 10000); }, 5000);
+      }
+      setTimeout(showNext, 8000);
+    })();
   </script>
 </body>
 </html>
