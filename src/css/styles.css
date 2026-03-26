@@ -499,6 +499,7 @@ h4 { font-size: 1.25rem; }
   color: var(--accent);
 }
 
+/* h4 selector kept for backwards compatibility; h3 override added in FIX-22 rules at bottom */
 .benefits-bar__text h4 {
   font-size: 0.875rem;
   margin-bottom: 2px;
@@ -678,6 +679,7 @@ h4 { font-size: 1.25rem; }
 .product-card__actions {
   display: flex;
   gap: 8px;
+  padding: 0 16px 16px; /* FIX-08: moved from inline style */
 }
 
 .product-card__actions .btn {
@@ -2424,7 +2426,137 @@ h4 { font-size: 1.25rem; }
 }
 
 @media (max-width: 480px) {
-  .social-proof { left: 12px; right: 12px; max-width: none; bottom: 80px; }
   .newsletter-modal__form { flex-direction: column; }
   .cookie-banner { padding: 12px 16px; font-size: 0.8rem; }
+}
+
+/* === Cart badge (FIX-13: extracted from inline style) === */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--highlight);
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* === FAQ accordion transition (FIX-25) === */
+.faq-item__answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.faq-item__answer.is-open {
+  max-height: 600px;
+}
+
+/* === Benefits bar: h3 inherits correct heading size (FIX-22) === */
+.benefits-bar__text h3 {
+  font-size: 0.875rem;
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+
+/* === Testimonial date (FIX-28) === */
+.testimonial-card__date {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* === Checkout alt contact (FIX-27) === */
+.checkout__alt-contact {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.checkout__alt-contact a {
+  color: var(--accent);
+}
+
+/* === Mobile search toggle button (FIX-24) === */
+.header__search-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .header__search-toggle {
+    display: flex;
+  }
+}
+
+/* === Mobile search overlay (FIX-24) === */
+.mobile-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 300;
+  background: var(--white);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-search-overlay__inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+}
+
+.mobile-search-overlay__inner input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  background: var(--surface);
+}
+
+.mobile-search-overlay__inner input:focus {
+  border-color: var(--accent);
+}
+
+.mobile-search-overlay__inner button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Product card actions padding already defined above (FIX-08) */
+
+/* === Dark mode: mobile search overlay === */
+[data-theme="dark"] .mobile-search-overlay {
+  background: var(--secondary);
+  border-color: rgba(255,255,255,0.1);
+}
+[data-theme="dark"] .mobile-search-overlay__inner input {
+  background: var(--primary);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.1);
 }
